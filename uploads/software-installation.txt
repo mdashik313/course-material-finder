@@ -1,0 +1,69 @@
+Ubuntu sortware installation:
+
+## 1
+chrome :
+1. wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+2. sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+## 2
+vs code:
+1. sudo apt-get install wget gpg
+2. wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+3. sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+4. sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+5. rm -f packages.microsoft.gpg
+## 3
+
+Intellig idea:
+1. download https://www.jetbrains.com/toolbox/app/
+2. sudo tar -xzf jetbrains-toolbox-1.17.7391.tar.gz -C /opt
+3. sudo apt install fuse
+4. cd opt/jetbrains-toolbox....
+5. ./jetbrains-toolbox 
+
+## 4
+
+Java: sudo apt install default-jre
+
+#brightness controller
+sudo add-apt-repository ppa:apandada1/brightness-controller
+sudo apt update && sudo apt install brightness-controller
+
+
+
+installed packages:
+1. xdg-desktop-portal-gnome
+2. sudo apt vlc (delete with config: sudo apt-get -purge remove vlc)
+3. brightness-controller
+
+## 5
+
+Installing tp-link wn725n driver:
+https://askubuntu.com/questions/1356402/install-tp-link-tl-wn725n-usb-wifi-driver-on-ubuntu-20-04
+
+We are still unable to discover why the device, using the usual built-in kernel driver, doesn't connect as expected. I notice, however, that the driver version here is newer than the built-in driver. https://github.com/lwfinger/rtl8188eu
+Let's install it and see if it helps.
+With a temporary internet connection by ethernet, tethering or whatever means possible, open a terminal and do:
+
+
+
+sudo apt update
+sudo apt install git
+git clone https://github.com/lwfinger/rtl8188eu.git
+cd rtl8188eu
+make
+sudo make install
+sudo -i
+echo "blacklist r8188eu"  >>  /etc/modprobe.d/blacklist.conf
+modprobe -r r8188eu
+exit
+
+Remove and reinsert your USB wireless and tell us if there is any improvement.
+At each newer kernel version update, after the requested restart, please do:
+cd rtl8188eu
+make clean
+git pull
+make
+sudo make install
+
+
