@@ -89,7 +89,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<?php include('templates/points.php');?>
+<?php include('templates/points.php');?>
   <?php include('templates/profileHeader.php') ?>
   <br><br>
 <div class="container">

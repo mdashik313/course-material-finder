@@ -1,2 +1,2 @@
-# course-material-finder
-Database Management System Lab Project
+# Course-Material-Finder
+A porject of Database Management System Laboratory.

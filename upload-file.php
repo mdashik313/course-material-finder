@@ -18,9 +18,9 @@
 		$course_name = $_POST['course_name'];
 		$trimester = $_POST['trimester'];
 		$department = $_POST['department'];
-		$link = $_POST['link'];
+		$links = $_POST['links'];
 
-		if (isset($_FILES['pdf_file']['name']) && $_POST['course_code'] != '')
+		if (isset($_FILES['pdf_file']['name']))
 		{
             $file_name = $_FILES['pdf_file']['name'];
             $file_tmp = $_FILES['pdf_file']['tmp_name'];
@@ -37,22 +37,13 @@
             //                     WHERE email = '$email'
             //                 ) " ;
 
-            $insertquery = "INSERT INTO course (course_name,course_code,materials,department_name,trimester,student_id,links) VALUES('$course_name','$course_code','$file_name','$department','$trimester','$student_id','$link')";
+            $insertquery = "INSERT INTO course (course_name,course_code,materials,links,department_name,trimester,student_id) VALUES('$course_name','$course_code','$file_name','$links','$department','$trimester','$student_id')";
                             
             $iquery = mysqli_query($conn, $insertquery);
             
 
             if(isset($iquery)){
-                ?>
-                <div class=
-                "alert alert-danger alert-dismissible
-                fade show text-center">
-                <a class="close" data-dismiss="alert"
-                    aria-label="close">×</a>
-                <strong>Failed!</strong>
-                    Your file is uploaded. Points will be updated after an admin approves.
-                </div>
-                <?php
+                echo 'success';
             }
 		}
 		else
@@ -64,7 +55,7 @@
                 <a class="close" data-dismiss="alert"
                     aria-label="close">×</a>
                 <strong>Failed!</strong>
-                    Course code and file must be filled.
+                    File must be uploaded in PDF format!
                 </div>
             <?php
 		}
@@ -107,13 +98,13 @@
                                     </div>
                                     
                                 </div>
-
+                                    <br>
                                 <div class="row justify-content-center">
                                     <div class="col-md-12 col-lg-10 col-12">
                                         <div class="form-group files">
                                             <!-- <label class="my-auto">Upload Your File </label> -->
                                             
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="col-lg-5 col-md-6 col-sm-12">
 
                                                 <!-- <div class="absolute">
                                                 
@@ -135,7 +126,7 @@
                                                 <input type="file"  name="pdf_file">
                                                 <br>
                                                 <br>
-                                                <div class="form-group"> <label for="exampleFormControlTextarea2">Links</label> <textarea class="form-control rounded-0" name="link" placeholder="Links for video lectures" id="exampleFormControlTextarea2" rows="2"></textarea></div>
+                                                <div class="form-group"> <label for="exampleFormControlTextarea2">Links</label> <textarea class="form-control rounded-0" name="links" placeholder="Links for video lectures" id="exampleFormControlTextarea2" rows="2"></textarea></div>
                                                 </div>
                             
                                             </div>

@@ -1,5 +1,6 @@
 <?php 
 include('config/db_connect.php');
+
 include('templates/header.php');
 
 $sql = "SELECT count(id) AS t_id,(SELECT count(expertise) FROM student where expertise NOT LIKE '') AS t_expert  FROM student";
@@ -25,8 +26,8 @@ $data1 = mysqli_fetch_assoc($result1);
       </h3>
       <p class="mb-8 leading-relaxed" >No more hassle for getting your course material.</p>
       <div class="flex justify-center">
-      <a href="signup.php" target="_blank" class="link-danger" style="text-decoration: none;"><button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">SignUP</button></a>
-      <a href="login.php" target="_blank" class="link-danger" style="text-decoration: none;"><button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">SignIn</button></a>
+      <a href="signup.php" class="link-danger" style="text-decoration: none;"><button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">SignUP</button></a>
+      <a href="login.php" class="link-danger" style="text-decoration: none;"><button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">SignIn</button></a>
       </div>
     </div>
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">

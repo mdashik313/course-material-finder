@@ -17,17 +17,17 @@
 
     <title>Course Material</title>
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/upload-file.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/28e6d5bc0f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/upload-file.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> -->
 
 </head>
 
@@ -42,6 +42,10 @@
     </a>
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="index.php">Home</a>
+      <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="request.php" >Make request</a>
+      <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="download.php">Download course</a>
+      <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="upload-file.php">Upload course</a>
+      <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="counselling.php">Get counsel</a>
       <a class="mr-5 hover:text-gray-900 text-white text-decoration-none" href="profile.php" target="_blank">Profile</a>
     </nav>
     <form action="" method="POST">

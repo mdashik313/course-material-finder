@@ -20,7 +20,7 @@
 
         //fetch the result
         $student = mysqli_fetch_array($result);
-
+        
         if($_POST['email']==$student['email'] && $_POST['password']==$student['student_pass']){
             if(is_array($student)){
                 $_SESSION['email'] = $student['email'];
@@ -28,9 +28,9 @@
             }
             echo "<script>alert('Email or password is incorrect.')</script>";
         }
-        else {
-          echo "<script>alert('Email or password is incorrect.')</script>";
-        }
+        // else {
+        //   echo "<script>alert('Email or password is incorrect.')</script>";
+        // }
 
 
     }

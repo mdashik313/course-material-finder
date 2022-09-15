@@ -15,7 +15,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <?php include('templates/points.php');?>
+<?php include('templates/points.php');?>
   <?php include('templates/profileHeader.php') ?>
   <div class="container">
     <div class="main-body">

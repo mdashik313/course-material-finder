@@ -11,7 +11,7 @@
 		$trimester = $_POST['trimester'];
 		$department_name = $_POST['department_name'];
 
-        $sql = "INSERT INTO `support` ( `course_code`, `course_name`, `trimester`,`department_name`,`status`) VALUES ( '$course_code', '$course_name', '$trimester','$department','0');";
+        $sql = "INSERT INTO `support` ( `course_code`, `course_name`, `trimester`,`department_name`,`status`) VALUES ( '$course_code', '$course_name', '$trimester','$department_name','0');";
         
 
         if(mysqli_query($conn,$sql)){
@@ -35,10 +35,9 @@
         
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/upload-file.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Make request</title>
-    <?php include('templates/points.php');?>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
     <style>
@@ -60,6 +59,7 @@ tr:nth-child(even) {background-color: #f2f2f2}
 
 </head>
 <body>
+<?php include('templates/points.php');?>
 <?php include('templates/profileHeader.php') ?>
     <form action="request.php" method="POST" enctype="multipart/form-data" >
         <div class="container card-0 justify-content-center ">
@@ -85,12 +85,12 @@ tr:nth-child(even) {background-color: #f2f2f2}
                                         <input type="text" class="form-control" id="Evaluate Budget" placeholder="Enter the trimester" name="trimester">
                                     </div>
                                     <div class="form-group"> <label for="">Department</label> 
-                                        <input type="text" class="form-control" id="Evaluate Budget" placeholder="Enter the department" name="department">
+                                        <input type="text" class="form-control" id="Evaluate Budget" placeholder="Enter the department" name="department_name">
                                     </div>                                        
                                     </div>
                                     
                                 </div>
-
+                                <br>
                                 <div class="row justify-content-center">
                                         <div class="row justify-content-end mb-5">
                                             <div class="col-lg-4 col-auto "><button type="submit" name="submit" class="btn btn-primary btn-block"><small class="font-weight-bold">Request</small></button> </div>
