@@ -118,9 +118,9 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
+                <!-- <form class="d-none d-md-flex ms-4">
                     <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-                </form>
+                </form> -->
                 <div class="navbar-nav align-items-center ms-auto">
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -242,6 +242,9 @@
                     </div>
                 </div>
             </div>
+
+
+            
             <!-- Sale & Revenue End -->
 
 
@@ -311,7 +314,7 @@
                                     
                                 } else { echo "0 results"; }
 
-                                $conn->close();
+                                // $conn->close();
 
                                     ?>
                                 
@@ -320,8 +323,109 @@
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
 
+            <!-- Courses -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Courses</h6>
+                        <!-- <a href="">Show All</a> -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Course name</th>
+                                    <th scope="col">Course code</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Trimester</th>
+                                    <th scope="col">Option</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                     <?php
+                                    $sql = "Select * from course";
+                                    $result = mysqli_query($conn,$sql);
+                                    $resultCheck = mysqli_num_rows($result);
+
+                                    if($resultCheck > 0){
+                                        $flag = 1;
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            if($row['approveStatus']==1){
+                                                $flag = 0;
+                                                echo "<tr><td>" . $row["course_name"]."</td><td>" . $row["course_code"]. "</td><td>" . $row["department_name"] . "</td><td>"
+                                                . $row["trimester"]. "</td><td>"."<form ><button> Delete </button></form>". "</td></tr>";
+                                            } 
+                                        }
+                                        
+                                    echo "</table>";
+                                    if($flag) echo "No course available";
+                                    
+                                 } else { echo "0 results"; }
+
+                                // $conn->close();
+
+                                    ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+<!-- upload course -->
+<div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Approve courses</h6>
+                        <!-- <a href="">Show All</a> -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Course code</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Trimester</th>
+                                    <th scope="col">Student Id</th>
+                                    <th scope="col">Approve</th>
+                                    <th scope="col">Delete</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                     <?php
+                                    $sql = "Select * from course";
+                                    $result = mysqli_query($conn,$sql);
+                                    $resultCheck = mysqli_num_rows($result);
+
+                                    if($resultCheck > 0){
+                                        $flag = 1;
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            if($row['approveStatus']==0){
+                                                $flag = 0;
+                                                echo "<tr><td>" . $row["course_code"]."</td><td>" . $row["department_name"]. "</td><td>" . $row["trimester"] . "</td><td>"
+                                                . $row["student_id"]. "</td><td>"."<form ><button> Approve </button></form>". "</td><td>"."<form ><button> Delete </button></form>". "</td></tr>";
+                                            } 
+                                        }
+                                        
+                                    echo "</table>";
+                                    if($flag) echo "No upload request available";
+                                    
+                                 } else { echo "0 requests"; }
+
+                                // $conn->close();
+
+                                    ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <!-- Widgets Start -->
             <div class="container-fluid pt-4 px-4">
