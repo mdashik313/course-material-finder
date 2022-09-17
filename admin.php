@@ -1,19 +1,20 @@
 <?php 
-include('config/db_connect.php');
+    include('config/db_connect.php');
+    session_start();
+    echo $_SESSION['admin_name'];
 
+    $sql = "SELECT count(id) AS t_id,(SELECT count(expertise) FROM student where expertise NOT LIKE '') AS t_expert  FROM student";
+    //get the result
+    $result = mysqli_query($conn,$sql);
+                    
+    $data = mysqli_fetch_assoc($result);
+    // echo $data['t_id'];
+    // echo $data['t_expert'];
 
-$sql = "SELECT count(id) AS t_id,(SELECT count(expertise) FROM student where expertise NOT LIKE '') AS t_expert  FROM student";
-//get the result
-$result = mysqli_query($conn,$sql);
-                
-$data = mysqli_fetch_assoc($result);
-// echo $data['t_id'];
-// echo $data['t_expert'];
-
-$sql1 = "SELECT count(id) AS total FROM course";
-$result1 = mysqli_query($conn,$sql1);
-                
-$data1 = mysqli_fetch_assoc($result1);
+    $sql1 = "SELECT count(id) AS total FROM course";
+    $result1 = mysqli_query($conn,$sql1);
+                    
+    $data1 = mysqli_fetch_assoc($result1);
 
 
 ?>

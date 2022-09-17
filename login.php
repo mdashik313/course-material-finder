@@ -13,24 +13,41 @@
     if(isset($_POST['Login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $sql = "SELECT * FROM student WHERE email='$email' AND student_pass='$password'";
+        $sqlStudent = "SELECT * FROM student WHERE email='$email' AND student_pass='$password'";
+        $sqlAdmin = "SELECT * FROM admin WHERE admin_name='$email' AND admin_pass='$password'";
 
         //get the result
-        $result = mysqli_query($conn,$sql);
+        $result = mysqli_query($conn,$sqlStudent);
 
-        //fetch the result
-        $student = mysqli_fetch_array($result);
-        
-        if($_POST['email']==$student['email'] && $_POST['password']==$student['student_pass']){
-            if(is_array($student)){
-                $_SESSION['email'] = $student['email'];
-                header("Location: index.php");
+        if(mysqli_num_rows($result)>0){
+            //fetch the result
+            $student = mysqli_fetch_array($result);
+            
+            if($_POST['email']==$student['email'] && $_POST['password']==$student['student_pass']){
+                if(is_array($student)){
+                    $_SESSION['email'] = $student['email'];
+                    header("Location: index.php");
+                }
+                echo "<script>alert('Email or password is incorrect.')</script>";
             }
-            echo "<script>alert('Email or password is incorrect.')</script>";
         }
-        // else {
-        //   echo "<script>alert('Email or password is incorrect.')</script>";
-        // }
+        else {
+            $result = mysqli_query($conn,$sqlAdmin);
+            if(mysqli_num_rows($result)>0){
+                //fetch the result
+                $admin = mysqli_fetch_array($result);
+                
+                if($_POST['email']==$admin['admin_name'] && $_POST['password']==$admin['admin_pass']){
+                    if(is_array($admin)){
+                        $_SESSION['admin_name'] = $admin['admin_name'];
+                        header("Location: admin.php");
+                    }
+                    echo "<script>alert('Email or password is incorrect.')</script>";
+                }
+            }
+            else echo "<script>alert('Email or password is incorrect.')</script>";
+        }
+        
 
 
     }
