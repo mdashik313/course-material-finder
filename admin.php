@@ -3,6 +3,26 @@
     session_start();
     echo $_SESSION['admin_name'];
 
+    //approving or deleting part
+    $id = $_GET['id'];
+    $s_id = $_GET['s_id'];
+    $del = $_GET['del'];
+    $sqlApprove = "UPDATE course SET approveStatus = 1 WHERE id='$id'";
+    $sqlDelete = "DELETE FROM course WHERE id = '$id'";
+    if($del==1) mysqli_query($conn,$sqlDelete);
+    else {
+        $a = (int) $s_id;
+        mysqli_query($conn,$sqlApprove);
+        $sql = "SELECT points FROM student WHERE student_id = '$a'";
+        $result = mysqli_query($conn,$sql);
+        $point = mysqli_fetch_array($result);
+        
+        echo $point['points'];
+
+        // $sql = "UPDATE student SET points = $p WHERE student_id = $a";
+        mysqli_query($conn,$sql);  
+    }
+
     $sql = "SELECT count(id) AS t_id,(SELECT count(expertise) FROM student where expertise NOT LIKE '') AS t_expert  FROM student";
     //get the result
     $result = mysqli_query($conn,$sql);
@@ -314,7 +334,6 @@
                                     
                                 } else { echo "0 results"; }
 
-                                // $conn->close();
 
                                     ?>
                                 
@@ -364,9 +383,6 @@
                                     if($flag) echo "No course available";
                                     
                                  } else { echo "0 results"; }
-
-                                // $conn->close();
-
                                     ?>
                                 
                             </tbody>
@@ -398,26 +414,26 @@
                             </thead>
                             <tbody>
                                      <?php
-                                    $sql = "Select * from course";
-                                    $result = mysqli_query($conn,$sql);
-                                    $resultCheck = mysqli_num_rows($result);
+                                            $sql = "Select * from course";
+                                            $result = mysqli_query($conn,$sql);
+                                            $resultCheck = mysqli_num_rows($result);
 
-                                    if($resultCheck > 0){
-                                        $flag = 1;
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            if($row['approveStatus']==0){
-                                                $flag = 0;
-                                                echo "<tr><td>" . $row["course_code"]."</td><td>" . $row["department_name"]. "</td><td>" . $row["trimester"] . "</td><td>"
-                                                . $row["student_id"]. "</td><td>"."<form ><button> Approve </button></form>". "</td><td>"."<form ><button> Delete </button></form>". "</td></tr>";
-                                            } 
-                                        }
-                                        
-                                    echo "</table>";
-                                    if($flag) echo "No upload request available";
-                                    
-                                 } else { echo "0 requests"; }
+                                            if($resultCheck > 0){
+                                                $flag = 1;
+                                                while($row = mysqli_fetch_assoc($result)){
+                                                    if($row['approveStatus']==0){
+                                                        $flag = 0; ?>
+                                                        <tr><td> <?php echo $row["course_code"];?> </td><td><?php echo $row["department_name"];?></td><td> <?php echo $row["trimester"];?> </td><td>
+                                                         <?php echo $row["student_id"];?></td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & s_id = <?php $row['student_id'] ?> & del=0"><button> Approve </button></a> </td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & del=1"><button> Delete </button> </a> </td></tr>
+                                                   <?php } 
+                                                } ?>
+                                                
+                                                </table>
+                                               <?php if($flag) echo "No upload request available";
+                                            
+                                            } else { echo "0 requests"; } 
 
-                                // $conn->close();
+    
 
                                     ?>
                                 

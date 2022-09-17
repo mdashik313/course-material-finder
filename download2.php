@@ -33,6 +33,8 @@
     if(isset($_SESSION['idDownloaded']) && $_SESSION['idDownloaded']=='yes'){
       $_SESSION['idDownloaded'] = 'no';
       $p = $student['points'] - 2.5;
+
+      //point update query
       $sql = "UPDATE student SET points = $p WHERE email='$email'";
       mysqli_query($conn,$sql);  
       $student['points'] = $p;
