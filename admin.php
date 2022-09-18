@@ -4,23 +4,28 @@
     echo $_SESSION['admin_name'];
 
     //approving or deleting part
-    $id = $_GET['id'];
-    $s_id = $_GET['s_id'];
-    $del = $_GET['del'];
-    $sqlApprove = "UPDATE course SET approveStatus = 1 WHERE id='$id'";
-    $sqlDelete = "DELETE FROM course WHERE id = '$id'";
-    if($del==1) mysqli_query($conn,$sqlDelete);
-    else {
-        $a = (int) $s_id;
-        mysqli_query($conn,$sqlApprove);
-        $sql = "SELECT points FROM student WHERE student_id = '$a'";
-        $result = mysqli_query($conn,$sql);
-        $point = mysqli_fetch_array($result);
-        
-        echo $point['points'];
+    if(isset($_GET['id']) && isset($_GET['s_id'])) {
+        $id = $_GET['id'];
+        $s_id = $_GET['s_id'];
+        $del = $_GET['del'];
+        $sqlDelete = "DELETE FROM course WHERE id = '$id'";
+        $sqlApprove = "UPDATE course SET approveStatus = 1 WHERE id='$id'";
+        if($del==1) {
+            mysqli_query($conn,$sqlDelete);
+            header('Location: admin.php');    
+        }
+        else {
+            mysqli_query($conn,$sqlApprove);
+            $sql = "SELECT points FROM student WHERE student_id = '$s_id'";
+            $result = mysqli_query($conn,$sql);
+            $point = mysqli_fetch_array($result);
+            
+            $p = (float)$point['points'] + 2.5;
 
-        // $sql = "UPDATE student SET points = $p WHERE student_id = $a";
-        mysqli_query($conn,$sql);  
+            $sql = "UPDATE student SET points = $p WHERE student_id = '$s_id'";
+            mysqli_query($conn,$sql);  
+            header('Location: admin.php');
+        }
     }
 
     $sql = "SELECT count(id) AS t_id,(SELECT count(expertise) FROM student where expertise NOT LIKE '') AS t_expert  FROM student";
@@ -347,7 +352,7 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Courses</h6>
+                        <h6 class="mb-0">All Courses</h6>
                         <!-- <a href="">Show All</a> -->
                     </div>
                     <div class="table-responsive">
@@ -395,7 +400,7 @@
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Approve courses</h6>
+                        <h6 class="mb-0">Pending Courses</h6>
                         <!-- <a href="">Show All</a> -->
                     </div>
                     <div class="table-responsive">
@@ -424,7 +429,7 @@
                                                     if($row['approveStatus']==0){
                                                         $flag = 0; ?>
                                                         <tr><td> <?php echo $row["course_code"];?> </td><td><?php echo $row["department_name"];?></td><td> <?php echo $row["trimester"];?> </td><td>
-                                                         <?php echo $row["student_id"];?></td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & s_id = <?php $row['student_id'] ?> & del=0"><button> Approve </button></a> </td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & del=1"><button> Delete </button> </a> </td></tr>
+                                                         <?php echo $row["student_id"];?></td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & s_id=<?php echo $row['student_id']; ?> & del=0"><button> Approve </button></a> </td><td> <a href="admin.php?id=<?php echo $row['id']; ?> & del=1"><button> Delete </button> </a> </td></tr>
                                                    <?php } 
                                                 } ?>
                                                 

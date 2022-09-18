@@ -10,7 +10,7 @@
                 
     //fetch the result
     $student = mysqli_fetch_array($result);
-    $student_id = $student['student_id'];
+    $student_id = (int) $student['student_id'];
 
 	if (isset($_POST['upload'])) {
 
@@ -37,7 +37,7 @@
             //                     WHERE email = '$email'
             //                 ) " ;
 
-            $insertquery = "INSERT INTO course (course_name,course_code,materials,links,department_name,trimester,student_id) VALUES('$course_name','$course_code','$file_name','$links','$department','$trimester','$student_id')";
+            $insertquery = "INSERT INTO course (course_name,course_code,materials,links,department_name,trimester,student_id) VALUES('$course_name','$course_code','$file_name','$links','$department','$trimester',$student_id)";
                             
             $iquery = mysqli_query($conn, $insertquery);
             

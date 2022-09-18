@@ -42,7 +42,7 @@
     //downloading part:
     if(!empty($_GET['file'])){
           
-      if($student['points'] >= .5){
+      if($student['points'] > .5){
         $fileName  = basename($_GET['file']);
         $filePath  = "uploads/".$fileName;
         $_SESSION['idDownloaded'] = 'yes';
