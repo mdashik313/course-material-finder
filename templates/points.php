@@ -6,4 +6,4 @@
     $result2 = mysqli_query($conn,$sql);
     $studentTemp = mysqli_fetch_array($result2);
 ?>
-<p style="width: 100%;background-color :black;color:white;padding-left: 80px;margin:0%"> Points : <?php echo $studentTemp['points'];?></p>
+<p style="width: 100%;background-color :black;color:white;padding-left: 80px;margin:0%; font-weight:bold; font-size: 20px"> Points : <?php echo $studentTemp['points'];?></p>

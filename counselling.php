@@ -41,7 +41,7 @@ tr:nth-child(even) {background-color: #f2f2f2}
     if($resultCheck > 0){
         $flag = 1;
         while($row = mysqli_fetch_assoc($result)){
-            if($row['expertise']!=''){
+            if($row['expertise']!=null){
                 $flag = 0;
                 echo "<tr><td>" . $row["student_name"]."</td><td>" . $row["student_id"]. "</td><td>" . $row["email"] . "</td><td>"
                 . $row["expertise"]. "</td></tr>";

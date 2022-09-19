@@ -1,9 +1,14 @@
 <?php 
     include('config/db_connect.php');
     session_start();
-    echo $_SESSION['admin_name'];
 
     //approving or deleting part
+    if(isset($_GET['del_id'])){
+        $del_id = $_GET['del_id'];
+        $sqlDelete = "DELETE FROM course WHERE id = '$del_id'";
+        mysqli_query($conn,$sqlDelete);
+        header('Location: admin.php'); 
+    }
     if(isset($_GET['id']) && isset($_GET['s_id'])) {
         $id = $_GET['id'];
         $s_id = $_GET['s_id'];
@@ -92,7 +97,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="admin.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Course_material</h3>
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Course Material</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -100,7 +105,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
+                        <h6 class="mb-0"><?php echo $_SESSION['admin_name']; ?></h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -213,12 +218,12 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <span class="d-none d-lg-inline-flex"><?php echo $_SESSION['admin_name']; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="profile.php" class="dropdown-item">My Profile</a>
                             <!-- <a href="#" class="dropdown-item">Settings</a> -->
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="login.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -229,7 +234,7 @@
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
+                    <!-- <div class="col-sm-6 col-xl-3">
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
@@ -237,7 +242,7 @@
                                 <h6 class="mb-0">$1234</h6>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
@@ -378,14 +383,16 @@
                                         $flag = 1;
                                         while($row = mysqli_fetch_assoc($result)){
                                             if($row['approveStatus']==1){
-                                                $flag = 0;
-                                                echo "<tr><td>" . $row["course_name"]."</td><td>" . $row["course_code"]. "</td><td>" . $row["department_name"] . "</td><td>"
-                                                . $row["trimester"]. "</td><td>"."<form ><button> Delete </button></form>". "</td></tr>";
-                                            } 
-                                        }
+                                                $flag = 0; ?>
+                                                 <!-- echo "<tr><td>" . $row["course_name"]."</td><td>" . $row["course_code"]. "</td><td>" . $row["department_name"] . "</td><td>"
+                                                 . $row["trimester"]. "</td><td>"."<form ><button> Delete </button></form>". "</td></tr>"; -->
+                                                <tr><td> <?php echo $row["course_name"];?> </td><td> <?php echo $row["course_code"]; ?> </td><td> <?php echo $row["department_name"]; ?> </td><td>
+                                                 <?php echo $row["trimester"]; ?> </td><td> <a href="admin.php?del_id=<?php echo $row['id']; ?>"> <button> Delete </button> </a> </td></tr>;
+                                         <?php   } 
+                                        } ?>
                                         
-                                    echo "</table>";
-                                    if($flag) echo "No course available";
+                                    </table>;
+                                    <?php if($flag) echo "No course available";
                                     
                                  } else { echo "0 results"; }
                                     ?>
@@ -434,7 +441,7 @@
                                                 } ?>
                                                 
                                                 </table>
-                                               <?php if($flag) echo "No upload request available";
+                                               <?php if($flag) echo "No pending courses";
                                             
                                             } else { echo "0 requests"; } 
 

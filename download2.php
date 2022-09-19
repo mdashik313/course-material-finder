@@ -42,7 +42,7 @@
     //downloading part:
     if(!empty($_GET['file'])){
           
-      if($student['points'] > .5){
+      if($student['points'] > 0){
         $fileName  = basename($_GET['file']);
         $filePath  = "uploads/".$fileName;
         $_SESSION['idDownloaded'] = 'yes';
@@ -116,7 +116,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title font-weight-bold"><?php echo $course_name;?></h5>
-                  <!-- <p class="card-text">Description: </p> -->
+                  <p class="card-text"><?php echo $course_code;?> </p>
                   <!-- <button type="button" class="btn btn-primary" style="background-color: #0275d8;">Download</button> -->
                 </div>
               </div>
@@ -140,7 +140,7 @@
                               </tr>';
                               
                       }
-                      echo '<div><h6><b>Lectures: </b>'.  $content['links'] .' </h6></div>'; 
+                      echo '<div><h6><b>Lecture links: </b>'.  $content['links'] .' </h6></div>'; 
                     }
                     
                   ?>
